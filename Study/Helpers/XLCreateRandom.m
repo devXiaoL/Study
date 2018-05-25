@@ -11,9 +11,16 @@
 @implementation XLCreateRandom
 
 
-- (NSArray *)randomValuesWithMinNum:(NSInteger)min maxNum:(NSInteger )max{
++ (NSArray *)noRepeatRandomArrayWithMinNum:(NSInteger)min maxNum:(NSInteger )max count:(NSInteger)count{
     
-    NSInteger count = max - min + 1;
+    NSMutableSet *set = [NSMutableSet setWithCapacity:count];
+    while (set.count < count) {
+        NSInteger value = arc4random() % (max-min+1) + min;
+        [set addObject:[NSNumber numberWithInteger:value]];
+    }
+    return set.allObjects;
+    /*
+    //NSInteger count = max - min + 1;
     NSMutableArray <NSNumber *>*randomValues = [NSMutableArray array];
     //保存随机数
     NSInteger value;
@@ -26,6 +33,7 @@
         [randomValues addObject:[NSNumber numberWithInteger:value]];
     }
     return randomValues;
+    */
 }
 
 @end

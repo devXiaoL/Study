@@ -50,10 +50,10 @@
 		A3B0D0D8207F400900CCBB16 /* chinese-poetry.db in Resources */ = {isa = PBXBuildFile; fileRef = A3B0D0D7207F400900CCBB16 /* chinese-poetry.db */; };
 		A3B0D0DA207F402600CCBB16 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A3B0D0D9207F402600CCBB16 /* libsqlite3.tbd */; };
 		A3B0D0DE207F5FD500CCBB16 /* ci.db in Resources */ = {isa = PBXBuildFile; fileRef = A3B0D0DD207F5FD500CCBB16 /* ci.db */; };
+		A3B1673120B7ACD6004D2633 /* XLSearchBarTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B1672F20B7ACD6004D2633 /* XLSearchBarTestVC.m */; };
+		A3B1673220B7ACD6004D2633 /* XLSearchBarTestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B1673020B7ACD6004D2633 /* XLSearchBarTestVC.xib */; };
 		A3C2E9472088967F00B052A3 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C2E9452088967F00B052A3 /* HomeViewController.m */; };
 		A3C2E9482088967F00B052A3 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C2E9462088967F00B052A3 /* HomeViewController.xib */; };
-		A3D5677920ABDF77001B2D9D /* UISearchBarTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5677720ABDF77001B2D9D /* UISearchBarTestVC.m */; };
-		A3D5677A20ABDF77001B2D9D /* UISearchBarTestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D5677820ABDF77001B2D9D /* UISearchBarTestVC.xib */; };
 		A3D5677D20ABFB50001B2D9D /* BarBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5677C20ABFB50001B2D9D /* BarBaseView.m */; };
 		A3D5678020AC0213001B2D9D /* XLSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5677F20AC0213001B2D9D /* XLSearchBar.m */; };
 		A3E11524206A2E0800E09B4F /* XLCreateRandom.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E11523206A2E0800E09B4F /* XLCreateRandom.m */; };
@@ -161,12 +161,12 @@
 		A3B0D0D7207F400900CCBB16 /* chinese-poetry.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = "chinese-poetry.db"; sourceTree = "<group>"; };
 		A3B0D0D9207F402600CCBB16 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A3B0D0DD207F5FD500CCBB16 /* ci.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = ci.db; sourceTree = "<group>"; };
+		A3B1672E20B7ACD6004D2633 /* XLSearchBarTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLSearchBarTestVC.h; sourceTree = "<group>"; };
+		A3B1672F20B7ACD6004D2633 /* XLSearchBarTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLSearchBarTestVC.m; sourceTree = "<group>"; };
+		A3B1673020B7ACD6004D2633 /* XLSearchBarTestVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XLSearchBarTestVC.xib; sourceTree = "<group>"; };
 		A3C2E9442088967F00B052A3 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		A3C2E9452088967F00B052A3 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		A3C2E9462088967F00B052A3 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		A3D5677620ABDF77001B2D9D /* UISearchBarTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UISearchBarTestVC.h; sourceTree = "<group>"; };
-		A3D5677720ABDF77001B2D9D /* UISearchBarTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UISearchBarTestVC.m; sourceTree = "<group>"; };
-		A3D5677820ABDF77001B2D9D /* UISearchBarTestVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UISearchBarTestVC.xib; sourceTree = "<group>"; };
 		A3D5677B20ABFB50001B2D9D /* BarBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BarBaseView.h; sourceTree = "<group>"; };
 		A3D5677C20ABFB50001B2D9D /* BarBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BarBaseView.m; sourceTree = "<group>"; };
 		A3D5677E20AC0213001B2D9D /* XLSearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLSearchBar.h; sourceTree = "<group>"; };
@@ -487,13 +487,13 @@
 		A3D5677520ABDF3F001B2D9D /* UISearchBar */ = {
 			isa = PBXGroup;
 			children = (
-				A3D5677620ABDF77001B2D9D /* UISearchBarTestVC.h */,
-				A3D5677720ABDF77001B2D9D /* UISearchBarTestVC.m */,
-				A3D5677820ABDF77001B2D9D /* UISearchBarTestVC.xib */,
 				A3D5677B20ABFB50001B2D9D /* BarBaseView.h */,
 				A3D5677C20ABFB50001B2D9D /* BarBaseView.m */,
 				A3D5677E20AC0213001B2D9D /* XLSearchBar.h */,
 				A3D5677F20AC0213001B2D9D /* XLSearchBar.m */,
+				A3B1672E20B7ACD6004D2633 /* XLSearchBarTestVC.h */,
+				A3B1672F20B7ACD6004D2633 /* XLSearchBarTestVC.m */,
+				A3B1673020B7ACD6004D2633 /* XLSearchBarTestVC.xib */,
 			);
 			path = UISearchBar;
 			sourceTree = "<group>";
@@ -626,8 +626,8 @@
 				A381B9FD2023025100EC616B /* AVFoundationTestVC.xib in Resources */,
 				A3C2E9482088967F00B052A3 /* HomeViewController.xib in Resources */,
 				A38A0E5D2022C6B800B31F43 /* Main.storyboard in Resources */,
-				A3D5677A20ABDF77001B2D9D /* UISearchBarTestVC.xib in Resources */,
 				A381B9E02022DA5000EC616B /* FeatureListVC.xib in Resources */,
+				A3B1673220B7ACD6004D2633 /* XLSearchBarTestVC.xib in Resources */,
 				A3B0D0D5207F31B200CCBB16 /* XLFMDBVC.xib in Resources */,
 				A381BA182024179100EC616B /* PicCategoryListVC.xib in Resources */,
 				A3B0D0D8207F400900CCBB16 /* chinese-poetry.db in Resources */,
@@ -818,13 +818,13 @@
 				A3C2E9472088967F00B052A3 /* HomeViewController.m in Sources */,
 				A381B9CE2022C84C00EC616B /* ENUMMacros.m in Sources */,
 				A381B9DF2022DA5000EC616B /* FeatureListVC.m in Sources */,
-				A3D5677920ABDF77001B2D9D /* UISearchBarTestVC.m in Sources */,
 				A3E11524206A2E0800E09B4F /* XLCreateRandom.m in Sources */,
 				A38A0E572022C6B800B31F43 /* AppDelegate.m in Sources */,
 				A381BA172024179100EC616B /* PicCategoryListVC.m in Sources */,
 				A381B9C52022C80500EC616B /* XLTabBarController.m in Sources */,
 				A381B9DB2022DA3600EC616B /* XLBaseViewController.m in Sources */,
 				A381B9FC2023025100EC616B /* AVFoundationTestVC.m in Sources */,
+				A3B1673120B7ACD6004D2633 /* XLSearchBarTestVC.m in Sources */,
 				A3B0D0D4207F31B200CCBB16 /* XLFMDBVC.m in Sources */,
 				A381BA0B2023027600EC616B /* PicListVC.m in Sources */,
 				A3D5677D20ABFB50001B2D9D /* BarBaseView.m in Sources */,
@@ -1004,7 +1004,7 @@
 				CODE_SIGN_ENTITLEMENTS = Study/Study.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 842PH7G7DK;
-				GCC_PREFIX_HEADER = /Users/lb_rainose/Desktop/Test/Github/Study/Study/Study/Config/XLPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Study/Config/XLPrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Study/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1022,7 +1022,7 @@
 				CODE_SIGN_ENTITLEMENTS = Study/Study.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 842PH7G7DK;
-				GCC_PREFIX_HEADER = /Users/lb_rainose/Desktop/Test/Github/Study/Study/Study/Config/XLPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Study/Config/XLPrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Study/Config/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

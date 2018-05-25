@@ -120,7 +120,7 @@
 		<key>detail</key>
 		<string>UISearchBar使用</string>
 		<key>targetVC</key>
-		<string>UISearchBarTestVC</string>
+		<string>XLSearchBarTestVC</string>
 	</dict>
 	<dict>
 		<key>title</key>

@@ -37,6 +37,7 @@
     [[NSURL URLWithString:@"/v1/wallpaper/category" relativeToURL:[NSURL URLWithString:@"http://service.store.dandanjiang.tv"]] absoluteURL];
     //输出
     @"http://service.store.dandanjiang.tv/v1/wallpaper/category";
+     
     [[NSURL URLWithString:@"/v1/wallpaper/category" relativeToURL:[NSURL URLWithString:@"http://service.store.dandanjiang.tv/"]] absoluteURL];
     //输出
     @"http://service.store.dandanjiang.tv/v1/wallpaper/category";

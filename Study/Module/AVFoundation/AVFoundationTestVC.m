@@ -81,6 +81,7 @@
         [self.speech speakUtterance:utterance];
     }
 }
+
 - (IBAction)pauseButtonAction:(UIButton *)sender {
     // AVSpeechBoundaryWord 说完一个单词之后暂停
     // AVSpeechBoundaryImmediate 立刻暂停
