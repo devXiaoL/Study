@@ -45,7 +45,6 @@
     [baseView addSubview:searchBar];
     self.navigationItem.titleView = baseView;
     
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,7 +59,7 @@
     
     NSInteger count = textField.text.integerValue;
     
-    NSLog(@"create random before date = %@",[self msecStringWithDate:[NSDate date]]);
+    NSLog(@"create random before date = %@", [self msecStringWithDate:[NSDate date]]);
     __block double msec = [[NSDate date] timeIntervalSince1970] * 1000;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSArray *arr = [XLCreateRandom  noRepeatRandomArrayWithMinNum:0 maxNum:count-1 count:count];
@@ -73,7 +72,6 @@
             self.randomTextView.text = [arr componentsJoinedByString:@","];
         });
     });
-    
     return YES;
 }
 

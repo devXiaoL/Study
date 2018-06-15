@@ -66,12 +66,12 @@
 
 
 #ifdef DEBUG //开发调试阶段
-#define LBLog(FORMAT, ...)  do { \
+#define NSLog(FORMAT, ...)  do { \
 fprintf(stderr,"%s:%d\n%s\n%s\n",[[[NSString stringWithUTF8String:__FILE__]  lastPathComponent] UTF8String], __LINE__, __func__,[[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);   \
 fprintf(stderr, "*********************************************\n");        \
 } while (0);
 #else  //发布上线阶段
-#define LBLog(...)
+#define NSLog(...)
 #endif
 
 #endif /* UtilsMacro_h */

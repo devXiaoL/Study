@@ -52,7 +52,7 @@
     [button addTarget:self action:@selector(backHomeAction:) forControlEvents:UIControlEventTouchUpInside];
     button.frame = CGRectMake(50, 100, 100, 100);
     [self.view addSubview:button];
-    
+    [button addTarget:self action:@selector(doubleTapButtonAction:) forControlEvents:UIControlEventTouchDownRepeat];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,6 +70,10 @@
     NSURLTestVC *vc = [NSURLTestVC new];
     
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)doubleTapButtonAction:(UIButton *)button {
+    
 }
 
 - (void)backHomeAction:(UIButton *)button {

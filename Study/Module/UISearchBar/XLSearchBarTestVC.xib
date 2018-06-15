@@ -77,7 +77,7 @@
                         <constraint firstAttribute="height" constant="40" id="Fvt-ez-UAn"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="插入排序"/>
                     <connections>
                         <action selector="tapButton:" destination="-1" eventType="touchUpInside" id="iD5-u3-YTT"/>
                     </connections>
