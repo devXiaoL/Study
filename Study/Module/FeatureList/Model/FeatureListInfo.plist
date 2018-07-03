@@ -130,5 +130,13 @@
 		<key>targetVC</key>
 		<string>NSURLTestVC</string>
 	</dict>
+	<dict>
+		<key>title</key>
+		<string>TableViewCellTest</string>
+		<key>detail</key>
+		<string>点击Cell之后改变cell的高度</string>
+		<key>targetVC</key>
+		<string>TableViewCellTestVC</string>
+	</dict>
 </array>
 </plist>
