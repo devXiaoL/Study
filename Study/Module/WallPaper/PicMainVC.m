@@ -85,11 +85,13 @@ static NSInteger const kMARGIN = 2;
     [self setupTitlesView];
     
     [self pageViewLayoutSubviews];
+    
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.contentScrollView.contentSize = CGSizeMake(kScreenWidth*3, self.view.bounds.size.height-40);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -173,9 +175,9 @@ static NSInteger const kMARGIN = 2;
         _contentScrollView.delegate = self;
         _contentScrollView.bounces = NO;
         _contentScrollView.alwaysBounceVertical = NO;
-        _contentScrollView.contentSize = CGSizeMake(kScreenWidth*3, self.view.bounds.size.height-64-40);
         _contentScrollView.pagingEnabled = YES;
         _contentScrollView.backgroundColor = [UIColor grayColor];
+        _contentScrollView.contentSize = CGSizeMake(kScreenWidth*3, self.view.bounds.size.height-40);
     }
     return _contentScrollView;
 }
@@ -209,9 +211,9 @@ static NSInteger const kMARGIN = 2;
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     
-    self.categoryVC.view.frame = CGRectMake(0, 0, kScreenWidth, self.contentScrollView.mj_h);
-    self.latestPicVC.view.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, self.contentScrollView.mj_h);
-    self.hotPicVC.view.frame = CGRectMake(kScreenWidth*2, 0, kScreenWidth, self.contentScrollView.mj_h);
+    self.categoryVC.view.frame = CGRectMake(0, 0, kScreenWidth, self.view.mj_h-40);
+    self.latestPicVC.view.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, self.view.mj_h-40);
+    self.hotPicVC.view.frame = CGRectMake(kScreenWidth*2, 0, kScreenWidth, self.view.mj_h-40);
 }
 
 

@@ -75,6 +75,26 @@
     return YES;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
+    if (reason == UITextFieldDidEndEditingReasonCommitted) {
+        NSInteger count = self.randomNumTextField.text.integerValue;
+        
+        NSLog(@"create random before date = %@", [self msecStringWithDate:[NSDate date]]);
+        __block double msec = [[NSDate date] timeIntervalSince1970] * 1000;
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSArray *arr = [XLCreateRandom  noRepeatRandomArrayWithMinNum:0 maxNum:count-1 count:count];
+            self.randomArr = arr;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSDate *date = [NSDate date];
+                NSLog(@"create random after date = %@",[self msecStringWithDate:date]);
+                double afterMsec = [date timeIntervalSince1970] * 1000;
+                NSLog(@"create random msec = %.0f",afterMsec - msec);
+                self.randomTextView.text = [arr componentsJoinedByString:@","];
+            });
+        });
+    }
+}
+
 #pragma mark - button action
 
 - (IBAction)tapButton:(UIButton *)sender {

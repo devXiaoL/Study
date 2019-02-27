@@ -33,7 +33,10 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    self.navigationItem.title = @"分类";
+    NSString *str = [[NSBundle mainBundle] localizedStringForKey:@"tabBarCate" value:@"" table:@""];
+    
+//    self.navigationItem.title = @"分类";
+    self.navigationItem.title = str;
     
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;

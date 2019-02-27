@@ -7,6 +7,7 @@
 //
 
 #import "NSURLTestVC.h"
+#import <Photos/Photos.h>
 
 @interface NSURLTestVC ()
 
@@ -16,6 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:nil forKey:@"test"];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger count = [userDefaults integerForKey:@"childCount"];
@@ -53,6 +57,8 @@
     button.frame = CGRectMake(50, 100, 100, 100);
     [self.view addSubview:button];
     [button addTarget:self action:@selector(doubleTapButtonAction:) forControlEvents:UIControlEventTouchDownRepeat];
+    
+    [self readPhotos];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,6 +93,17 @@
 
 - (void)dealloc {
     NSLog(@"%s---%@",__func__,self.navigationItem.title);
+}
+
+- (void)readPhotos{
+    PHFetchResult *collections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:nil];
+    PHFetchResult *assets = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
+    for (PHAssetCollection *assetCollection in collections) {
+        NSLog(@"assetCollection = %@",assetCollection);
+    }
+    for (PHAsset *asset in assets) {
+        NSLog(@"asset = %@",asset);
+    }
 }
 
 @end

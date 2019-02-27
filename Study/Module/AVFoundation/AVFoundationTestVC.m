@@ -44,7 +44,9 @@
         make.centerX.equalTo(self.view);
     }];
     self.volumeLabel = volumeLabel;
-    //读取系统音量
+    // 设置步进按钮
+    [self setupStepper];
+    // 读取系统音量
     [self readSystemVolume];
     
     [self configureVolume];
@@ -63,6 +65,14 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:volumeChangeKey object:nil];
 }
 
+
+- (void)setupStepper {
+    // 系统音量一共有 16 格
+    CGFloat stepValue = 1/16.0;
+    self.volumeStepper.minimumValue = 0;
+    self.volumeStepper.maximumValue = 1;
+    self.volumeStepper.stepValue = stepValue;
+}
 
 
 - (IBAction)startReadButtonAction:(UIButton *)sender {
@@ -97,9 +107,6 @@
 }
 
 #pragma mark - 音量
-
-
-
 /**
  读取系统音量
  */
@@ -107,9 +114,26 @@
     
     AVAudioSession *audio = [AVAudioSession sharedInstance];
     CGFloat volume = audio.outputVolume;
-    
-    self.volumeLabel.text = [NSString stringWithFormat:@"系统音量：%.2f",volume];
+    self.volumeLabel.text = [NSString stringWithFormat:@"系统音量：%.0f",volume/0.0625];
     self.volumeStepper.value = volume;
+}
+
+- (void)configureVolume {
+    _volumeView = [[MPVolumeView alloc] init];
+    _volumeViewSlider = nil;
+    for (UIView *view in [_volumeView subviews]){
+        if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+            _volumeViewSlider = (UISlider *)view;
+            break;
+        }
+    }
+    // 使用这个category的应用不会随着手机静音键打开而静音，可在手机静音下播放声音
+    NSError *setCategoryError = nil;
+    BOOL success = [[AVAudioSession sharedInstance]
+                    setCategory: AVAudioSessionCategoryPlayback
+                    error: &setCategoryError];
+    
+    if (!success) { /* handle the error in setCategoryError */ }
     
 }
 
@@ -129,38 +153,17 @@
     [self.volumeViewSlider sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
+#pragma mark - notification
+
 - (void)systemVolumeChanged:(NSNotification *)notification{
-    //    if ([notification.name isEqualToString:volumeChangeKey]) {
-    //2.获取到当前音量
-    float volume = [[[notification userInfo] valueForKey:volumeValueKey ] floatValue];
-    self.volumeLabel.text = [NSString stringWithFormat:@"系统音量：%.2f",volume];
-    //    }
-    
-}
-
-- (void)hideSystemVolumeView {
-    
-}
-
-- (void)configureVolume {
-    _volumeView = [[MPVolumeView alloc] init];
-    _volumeViewSlider = nil;
-    for (UIView *view in [_volumeView subviews]){
-        if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
-            _volumeViewSlider = (UISlider *)view;
-            break;
-        }
+    if ([notification.name isEqualToString:volumeChangeKey]) {
+        //2.获取到当前音量
+        float volume = [[[notification userInfo] valueForKey:volumeValueKey ] floatValue];
+        self.volumeLabel.text = [NSString stringWithFormat:@"系统音量：%.0f",volume/0.0625];
     }
-    
-    // 使用这个category的应用不会随着手机静音键打开而静音，可在手机静音下播放声音
-    NSError *setCategoryError = nil;
-    BOOL success = [[AVAudioSession sharedInstance]
-                    setCategory: AVAudioSessionCategoryPlayback
-                    error: &setCategoryError];
-    
-    if (!success) { /* handle the error in setCategoryError */ }
-    
 }
+
+
 
 /*
  文本转语音技术, 也叫TTS, 是Text To Speech的缩写. iOS如果想做有声书等功能的时候, 会用到这门技术.

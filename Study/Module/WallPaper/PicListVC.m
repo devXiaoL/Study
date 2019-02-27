@@ -170,14 +170,6 @@
 
 #pragma mark - CollectionView Delegate
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    PicBrowseVC *vc = [PicBrowseVC showBrowseWithImageInfo:self.imageInfos withCurrentIndex:indexPath.item];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     return CGSizeMake(kScreenWidth/2.0 - 1, kScreenWidth/2.0 - 1);
 }
@@ -188,6 +180,13 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
     return 2;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    PicBrowseVC *vc = [PicBrowseVC showBrowseWithImageInfo:self.imageInfos withCurrentIndex:indexPath.item];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 #pragma mark - custom Delegate
@@ -204,6 +203,7 @@
     XLNetRequest *request = [[XLNetRequest alloc]init];
     
 //    NSString *url = [NSString stringWithFormat:@"http://service.store.dandanjiang.tv/v1/wallpaper/resource?height=2208&limit=%zd&order=%@&skip=%zd&sys_language=zh-Hans-CN&width=1242",self.requestPageCapacity,self.type,self.requestPageCapacity*page];
+    
     NSString *url = @"http://service.store.dandanjiang.tv/v1/wallpaper/resource";
     
     NSNumber *width  = @(1242);

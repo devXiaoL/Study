@@ -14,10 +14,12 @@ target 'Study' do
   pod 'MJExtension'
   pod 'IQKeyboardManager'
   pod 'DZNEmptyDataSet'
+  pod 'FMDB'
+  pod 'MBProgressHUD'
   
-  
-  
-  
+
+
+
   target 'StudyTests' do
     inherit! :search_paths
     # Pods for testing
