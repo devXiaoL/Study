@@ -389,7 +389,7 @@ static NSInteger const kImageViewTag = 1081;
      PHAssetCollection : 一个PHAssetCollection对象就代表一个相册
      */
     __block UIImage *blockImage = image;
-    __block NSString *assetId = nil;
+    __block NSString *assetId;
     
     PHPhotoLibrary *library = [PHPhotoLibrary sharedPhotoLibrary];
     // 1. 存储图片到"相机胶卷"
@@ -397,47 +397,57 @@ static NSInteger const kImageViewTag = 1081;
         // 新建一个PHAssetCreationRequest对象, 保存图片到"相机胶卷"
         // 返回PHAsset(图片)的字符串标识
         assetId = [PHAssetCreationRequest creationRequestForAssetFromImage:blockImage].placeholderForCreatedAsset.localIdentifier;
+        
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
         if (error) {
             NSLog(@"error1%@", error);
             return;
         }
         NSLog(@"成功保存图片到相机胶卷中");
-        
+        [self saveImageToCustomAlbum:assetId];
     }];
+}
+
+- (void)saveImageToCustomAlbum:(NSString *)assetId {
     // 1. 获取自定义相册
-    PHAssetCollection *collection = [self createdCollection];
-    
-    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-        // 新建一个PHAssetCreationRequest对象, 保存图片到 自定义相册
-        PHAssetCollectionChangeRequest *request = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:collection];
-        // 根据唯一标示获得相片对象
-        PHAsset *asset = [PHAsset fetchAssetsWithLocalIdentifiers:@[assetId] options:nil].firstObject;
-        // 添加图片到相册中
-        [request addAssets:@[asset]];
-        
-    } completionHandler:^(BOOL success, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"保存图片到相机胶卷中失败");
-            return;
-        }
-        [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+    [self getPHAssetCollection:^(PHAssetCollection *customCollection) {
+        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+            // 新建一个PHAssetCreationRequest对象, 保存图片到 自定义相册
+            PHAssetCollectionChangeRequest *request = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:customCollection];
+            // 根据唯一标示获得相片对象
+            PHAsset *asset = [PHAsset fetchAssetsWithLocalIdentifiers:@[assetId] options:nil].firstObject;
+            // 添加图片到相册中
+            [request addAssets:@[asset]];
+            
+        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"保存图片到相机胶卷中失败");
+                return;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD setMinimumDismissTimeInterval:2];
+                [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+            });
+            
+        }];
     }];
 }
 
 /**
  *  获得【自定义相册】
  */
-- (PHAssetCollection *)createdCollection
+- (void)getPHAssetCollection:(void(^)(PHAssetCollection *))customCollection
 {
     // 获取软件的名字作为相册的标题
     NSString *title = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"];
     
     // 获得所有的自定义相册
     PHFetchResult<PHAssetCollection *> *collections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    
     for (PHAssetCollection *collection in collections) {
         if ([collection.localizedTitle isEqualToString:title]) {
-            return collection;
+            customCollection(collection);
+            return;
         }
     }
     // 代码执行到这里，说明还没有自定义相册
@@ -445,9 +455,9 @@ static NSInteger const kImageViewTag = 1081;
     // 创建一个新的相册
     [[PHPhotoLibrary sharedPhotoLibrary] performChangesAndWait:^{
         createdCollectionId = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:title].placeholderForCreatedAssetCollection.localIdentifier;
+        PHAssetCollection *collection = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[createdCollectionId] options:nil].firstObject;
+        customCollection(collection);
     } error:nil];
-    
-    return [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[createdCollectionId] options:nil].firstObject;
 }
 
 #pragma mark - getter && setter
