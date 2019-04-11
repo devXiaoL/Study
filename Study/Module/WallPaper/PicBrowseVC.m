@@ -161,9 +161,15 @@ static NSInteger const kImageViewTag = 1081;
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.contentView.backgroundColor = [UIColor whiteColor];
+    
     UIScrollView *scrollView = [cell.contentView viewWithTag:1080];
     if (!scrollView) {
         scrollView = [[UIScrollView alloc]initWithFrame:cell.contentView.bounds];
+        if (@available(iOS 11.0, *)) {
+            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            // Fallback on earlier versions
+        }
         scrollView.tag = 1080;
         scrollView.delegate = self;
         scrollView.contentSize = cell.contentView.bounds.size;
@@ -181,6 +187,19 @@ static NSInteger const kImageViewTag = 1081;
         [scrollView addSubview:imageView];
     }
 //    [imageView sd_setShowActivityIndicatorView:YES];
+    
+    UIButton *downloadBtn = [cell.contentView viewWithTag:(1082+indexPath.item)];
+    if (!downloadBtn) {
+        downloadBtn = [[UIButton alloc]init];
+        [downloadBtn setImage:[UIImage imageNamed:@"download"] forState:UIControlStateNormal];
+        [downloadBtn addTarget:self action:@selector(downloadButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:downloadBtn];
+        [downloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo(40);
+            make.bottom.equalTo(cell.contentView).offset(-30);
+            make.right.equalTo(cell.contentView).offset(-30);
+        }];
+    }
     
     ImageInfo *info = self.imageInfo[indexPath.item];
     NSURL *url  = [NSURL URLWithString:info.url];
@@ -252,6 +271,11 @@ static NSInteger const kImageViewTag = 1081;
 
 #pragma mark - method
 
+
+- (void)downloadButtonAction:(UIButton *)sender {
+    [self savePicToPhotoLibray:self.currentImage];
+    
+}
 
 - (void)setupTagLabel:(NSInteger)index{
     NSString *tagStr = [self tagStrWithIndex:index];

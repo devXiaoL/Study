@@ -27,6 +27,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (@available(iOS 11.0, *)) {
+        self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+    }
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([PicCategoryCell class]) bundle:nil] forCellWithReuseIdentifier:@"cell"];
     
     

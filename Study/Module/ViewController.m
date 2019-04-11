@@ -8,8 +8,11 @@
 
 #import "ViewController.h"
 #import <FMDB.h>
+#import "WaveView.h"
 
 @interface ViewController ()
+
+@property (nonatomic, strong) WaveView *waveView;
 
 @end
 
@@ -18,6 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view addSubview:self.waveView];
+    
+     [self.waveView openTimer];
     
     CGFloat rate = rate = 12;
     // 预计应收金额 （（出借金额+当前预计收益）*(1-折让率) 的计算值 ）
@@ -88,5 +94,16 @@
     
     return  [numberFormatter stringFromNumber:[NSNumber numberWithFloat:floatV]];
 }
+
+
+- (WaveView *)waveView{
+    if (!_waveView) {
+        _waveView = [[WaveView alloc]initWithFrame:CGRectMake(0, 100, 375, 100)];
+        _waveView.present = 0.3;
+        _waveView.presentlabel.hidden = YES;
+    }
+    return _waveView;
+}
+
 
 @end

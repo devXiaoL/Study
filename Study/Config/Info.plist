@@ -43,9 +43,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>需要访问您的相册，才能为你提供相应的服务</string>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
+	<array/>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

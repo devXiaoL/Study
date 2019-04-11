@@ -74,6 +74,7 @@ static NSInteger const kMARGIN = 2;
     [self.view addSubview:self.contentScrollView];
     [self.view addSubview:self.titlesView];
     
+    
     [self addChildViewController:self.categoryVC];
     [self addChildViewController:self.latestPicVC];
     [self addChildViewController:self.hotPicVC];
@@ -91,7 +92,7 @@ static NSInteger const kMARGIN = 2;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.contentScrollView.contentSize = CGSizeMake(kScreenWidth*3, self.view.bounds.size.height-40);
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -148,6 +149,10 @@ static NSInteger const kMARGIN = 2;
 #pragma mark - action
 
 - (void)titleBtnAction:(UIButton *)btn{
+    
+    UITabBarController *tabBarC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+
+    
     NSInteger tag = btn.tag;
     if (self.currentPage == tag - 1000) {
         return;
@@ -172,12 +177,17 @@ static NSInteger const kMARGIN = 2;
 - (UIScrollView *)contentScrollView{
     if (!_contentScrollView) {
         _contentScrollView = [[UIScrollView alloc]init];
+        if (@available(iOS 11.0, *)) {
+            _contentScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            // Fallback on earlier versions
+        }
         _contentScrollView.delegate = self;
         _contentScrollView.bounces = NO;
         _contentScrollView.alwaysBounceVertical = NO;
         _contentScrollView.pagingEnabled = YES;
-        _contentScrollView.backgroundColor = [UIColor grayColor];
-        _contentScrollView.contentSize = CGSizeMake(kScreenWidth*3, self.view.bounds.size.height-40);
+        _contentScrollView.backgroundColor = [UIColor blueColor];
+//        _contentScrollView.contentSize = CGSizeMake(kScreenWidth*3, self.view.bounds.size.height-40);
     }
     return _contentScrollView;
 }
@@ -203,13 +213,15 @@ static NSInteger const kMARGIN = 2;
     }];
     
     [self.contentScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(40);
-        make.left.bottom.right.equalTo(self.view).with.offset(0);
+        make.top.equalTo(self.titlesView.mas_bottom).offset(0);
+        make.left.bottom.right.equalTo(self.view);
     }];
 }
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
+    
+    self.contentScrollView.contentSize = CGSizeMake(kScreenWidth*3, self.view.bounds.size.height-40);
     
     self.categoryVC.view.frame = CGRectMake(0, 0, kScreenWidth, self.view.mj_h-40);
     self.latestPicVC.view.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, self.view.mj_h-40);
